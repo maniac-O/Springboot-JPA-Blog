@@ -1,19 +1,31 @@
 package com.cos.blog.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Board {
 	@Id
@@ -29,9 +41,12 @@ public class Board {
 	@ColumnDefault("0")
 	private int count; // 조회수
 	
-	@ManyToOne // Board = Many, User = One
+	@ManyToOne(fetch = FetchType.EAGER) // Board = Many, User = One
 	@JoinColumn(name="userId")
-	private User userId; // 작성자 : DB는 오브젝트를 저장할 수 없다( FK사용 )    <-->  자바는 오브젝트를 저장할 수 있다.   (User라는 오브젝트로 지정을 하면 타입이 충돌난다)
+	private User user; // 작성자 : DB는 오브젝트를 저장할 수 없다( FK사용 )    <-->  자바는 오브젝트를 저장할 수 있다.   (User라는 오브젝트로 지정을 하면 타입이 충돌난다)
+	
+	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) // mappedBy 연관관계의 주인이 아니다 (난 FK가 아니에요) = DB에 칼럼을 만들지 마세요
+	private List<Reply> reply;
 	
 	@CreationTimestamp
 	private Timestamp createDate;
