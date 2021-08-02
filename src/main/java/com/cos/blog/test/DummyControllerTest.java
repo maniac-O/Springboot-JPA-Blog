@@ -41,7 +41,6 @@ public class DummyControllerTest {
 		
 		return "삭제 되었습니다.";
 	}
-	
 	// save()는  삽입 메소드가 맞지만, 이미 있는 id 값이면 update로 고쳐준다.
 	// email, password
 	@Transactional	// 함수 종료시 자동 commit
@@ -50,7 +49,7 @@ public class DummyControllerTest {
 		System.out.println("id : "+id);
 		System.out.println("password : "+requestUser.getPassword());
 		System.out.println("email : "+requestUser.getEmail());
-		
+
 		// 이 때 영속성 컨텍스트에 영속화 됨
 		User user = userRepository.findById(id).orElseThrow(()->{
 			return new IllegalArgumentException("수정에 실패하였습니다.");
@@ -102,6 +101,7 @@ public class DummyControllerTest {
 		// user/4 를 찾다가 DB에서 못찾아오게 되면 user가 null이 될 것 아냐? 
 		// 그럼 return null 이 리턴 되잖아 >> 그럼 프로그램에 문제가 있지 않을까?
 		// Optional로 너의 User 객체를 감싸서 가져올테니 null 인지 아닌지 판단해서 return 해
+
 		User user = userRepository.findById(id).orElseThrow(new Supplier<IllegalArgumentException>() {
 			@Override
 			public IllegalArgumentException get() {
