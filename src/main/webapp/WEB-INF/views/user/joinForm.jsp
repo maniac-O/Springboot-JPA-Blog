@@ -18,10 +18,9 @@
 	    <label for="email">Email address</label>
 	    <input type="email" class="form-control" placeholder="Enter email" id="email">
 	  </div>
-	  
-	</form>
 	<button id="btn-save" type="submit" class="btn btn-primary">회원가입완료</button>
+	</form>
 </div>
 
-<script src="/blog/js/user.js"></script>
+<script src="/js/user.js"></script>
 <%@ include file="../layout/footer.jsp" %>
