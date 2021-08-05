@@ -20,7 +20,7 @@ import com.cos.blog.config.auth.PrincipalDetailService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-	private PrincipalDetailService priniciPrincipalDetailService;
+	private PrincipalDetailService principalDetailService;
 	
 	@Bean // IoC가 된다.
 	public BCryptPasswordEncoder encodePWD() {
@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// 같이 해쉬로 암호화해서 DB에 있는 해쉬랑 비교할 수 있음
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(priniciPrincipalDetailService).passwordEncoder(encodePWD());
+		auth.userDetailsService(principalDetailService).passwordEncoder(encodePWD());
 	}
 	
 	
@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.csrf().disable()	// csrf 토큰 비활성화
 			.authorizeRequests()
-				.antMatchers("/","/auth/**","/js/**","/css/**","/image/**")
+				.antMatchers("/","/auth/**","/js/**","/css/**","/image/**","/dummy/**")
 				.permitAll()
 				.anyRequest()
 				.authenticated()

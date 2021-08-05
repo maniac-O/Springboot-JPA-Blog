@@ -38,14 +38,13 @@ public class Board {
 	@Lob // 대용량 데이터
 	private String content; // 섬머노트 라이브러리 : <html>태그가 섞여서 디자인이 됨
 	
-	@ColumnDefault("0")
 	private int count; // 조회수
 	
 	@ManyToOne(fetch = FetchType.EAGER) // Board = Many, User = One
 	@JoinColumn(name="userId")
 	private User user; // 작성자 : DB는 오브젝트를 저장할 수 없다( FK사용 )    <-->  자바는 오브젝트를 저장할 수 있다.   (User라는 오브젝트로 지정을 하면 타입이 충돌난다)
 	
-	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) // mappedBy 연관관계의 주인이 아니다 (난 FK가 아니에요) = DB에 칼럼을 만들지 마세요
+	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) // mappedBy 연관관계의 주인이 아니다 (난 FK가 아니에요) = DB에 칼럼을 만들지 마세요   (SELECT를 위한 코드)
 	private List<Reply> reply;
 	
 	@CreationTimestamp
