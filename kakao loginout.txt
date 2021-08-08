@@ -1,0 +1,5 @@
+웹서버주소 : http://localhost:8080
+클라이언트키(Rest API) : 0fd5a0bca97406852777dcf00b3958d0
+
+로그인 주소 : http://localhost:8080/auth/kakao/callback
+로그아웃 주소 : http://localhost:8080/auth/kakao/logout
