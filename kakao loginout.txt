@@ -3,3 +3,6 @@
 
 로그인 주소 : http://localhost:8080/auth/kakao/callback
 로그아웃 주소 : http://localhost:8080/auth/kakao/logout
+
+User 오브젝트 : id(번호), username, password, email
+카카오로부터 받을 정보 : profile정보(필수), email(선택)
