@@ -34,6 +34,8 @@ let index = {
 		}); // ajax 통신을 이용해서 3개의 데이터를 json으로 변경하여 insert 요청
 	},
 	
+	// update 기능 맵핑
+	// id 값 hidden으로 가져와서 데이터를 넘겨줘야 업데이트 가능
 	update:function(){
 		let data = {
 			id:$("#id").val(),

@@ -58,7 +58,8 @@ public class UserApiController {
 		// 이 시점에 트랜잭션이 종료되기 때문에 DB에 값은 변경이 됬지만
 		// 세션값은 변경되지 않은 상태이기 때문에 우리가 직접 세션값을 변경해줄 것이다.
 		
-		// 세션 등록
+		// 세션 재등록
+		// 회원수정이 완료되고 데이터가 제대로 반영되기 위해 새션을 강제로 재등록 해준다.
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
