@@ -45,6 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	
+	// 실제로 Authentication Security가 동작하여 실행하는 부분 
+	//Velog 글 참조하면 자세한 설명 볼 수 있음
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
