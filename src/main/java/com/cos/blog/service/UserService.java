@@ -29,6 +29,14 @@ public class UserService {
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 	
+	@Transactional(readOnly = true)
+	public User 회원찾기(String username) {
+		User user = userRepository.findByUsername(username).orElseGet(()->{
+			return new User();
+		});
+		return user; 
+	}
+	
 	// 전체 성공 시 commit
 	// 실패 시 roleback
 	@Transactional
@@ -50,10 +58,15 @@ public class UserService {
 			return new IllegalArgumentException("회원 찾기 실패");
 		});
 		
-		String rawPassword = user.getPassword();
-		String encPassword = encoder.encode(rawPassword);
-		persistance.setPassword(encPassword);
-		persistance.setEmail(user.getEmail());
+		// kakao 사용자(oAuth값이 있는 사용자)가 값을 만약에 넘기더라도
+		// 인코딩이 안되기 때문에 수정을 할 수 없음
+		if(persistance.getOauth() == null || persistance.getOauth().equals(""))
+		{
+			String rawPassword = user.getPassword();
+			String encPassword = encoder.encode(rawPassword);
+			persistance.setPassword(encPassword);
+			persistance.setEmail(user.getEmail());
+		}
 
 		// 회원수정 함수 종료 시 = 서비스 종료 = 트랜잭션 종료 = commit 이 자동으로 된다.
 		// 영속화 된 persistance  객체의 변화가 감지되면 더티체킹이 되어 update문을 날려줌

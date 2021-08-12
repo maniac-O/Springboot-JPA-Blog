@@ -47,6 +47,8 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private RoleType role; // Enum을 쓰는게 좋다. -> 도메인 설정을 한다(내가 설정한 범위만의 값만 설정 가능). // Admin, user, manager 
 	
+	private String oauth;	// kakao, google
+	
 	@CreationTimestamp // 시간 자동 입력
 	private Timestamp createDate;
 }

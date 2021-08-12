@@ -1,8 +1,34 @@
-웹서버주소 : http://localhost:8080
-클라이언트키(Rest API) : 0fd5a0bca97406852777dcf00b3958d0
+1. 웹서버주소 : http://localhost:8080
+2. 클라이언트키(Rest API) : 0fd5a0bca97406852777dcf00b3958d0
 
-로그인 주소 : http://localhost:8080/auth/kakao/callback
-로그아웃 주소 : http://localhost:8080/auth/kakao/logout
+3. 로그인 주소 : http://localhost:8080/auth/kakao/callback
+4. 로그아웃 주소 : http://localhost:8080/auth/kakao/logout
 
+5. 카카오 동의 구성
 User 오브젝트 : id(번호), username, password, email
 카카오로부터 받을 정보 : profile정보(필수), email(선택)
+
+6. 로그인 요청 주소
+https://kauth.kakao.com/oauth/authorize?client_id=0fd5a0bca97406852777dcf00b3958d0&redirect_uri=http://localhost:8080/auth/kakao/callback&response_type=code
+
+7. 응답 받은 코드
+http://localhost:8080/auth/kakao/callback?code=xRrE7A59MJCTQzJClKpwsCrIqWx2bpC3RjirzZFr0RFNbmsYmIipxyU6d0M993ULRhZllAopyV4AAAF7OOGHjA
+
+8. 토큰 발급 요청 주소 (POST) - http body에 데이터를 전달 (5가지 데이터를 담아라)
+요청 주소 : https://kauth.kakao.com/oauth/token
+
+헤더 값:
+MIME 타입 : application/x-www-form-urlencoded;charset=utf-8  (key=value)
+
+바디 값:
+grant_type = authorization_code
+client_id = 0fd5a0bca97406852777dcf00b3958d0
+redirect_uri = http://localhost:8080/auth/kakao/callback
+code = {동적으로 받은 코드}
+client_secret = {}
+
+9. 토큰을 통한 사용자 정보 조회 (GET, POST)
+요청 주소 : https://kapi.kakao.com/v2/user/me HTTP/1.1
+헤더 값 :
+Authorization: Bearer {ACCESS_TOKEN}
+Content-type: application/x-www-form-urlencoded;charset=utf-8
