@@ -43,9 +43,6 @@ public class UserController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
-	@Autowired
-	private BCryptPasswordEncoder encoder;
-	
 	@GetMapping("/auth/joinForm")
 	public String joinForm() {
 		
@@ -66,6 +63,7 @@ public class UserController {
 		// OkHttp
 		// RestTemplate
 		
+		// 토큰 생성 요청 RestTemplate 생성
 		RestTemplate rt = new RestTemplate();
 		
 		// HttpHeader 오브젝트 생성
@@ -97,6 +95,7 @@ public class UserController {
 		String responseBody = (String) response.getBody();
 		OAuthToken oauthToken = null;
 		try {
+			// 토큰으로 들어온 데이터 파싱
 			oauthToken = objectMapper.readValue(responseBody, OAuthToken.class);
 		}catch (JsonMappingException e) {
 			e.printStackTrace();

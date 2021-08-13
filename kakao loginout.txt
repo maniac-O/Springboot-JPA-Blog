@@ -28,7 +28,7 @@ code = {동적으로 받은 코드}
 client_secret = {}
 
 9. 토큰을 통한 사용자 정보 조회 (GET, POST)
-요청 주소 : https://kapi.kakao.com/v2/user/me HTTP/1.1
+요청 주소 : https://kapi.kakao.com/v2/user/me
 헤더 값 :
 Authorization: Bearer {ACCESS_TOKEN}
 Content-type: application/x-www-form-urlencoded;charset=utf-8
