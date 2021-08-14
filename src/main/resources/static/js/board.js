@@ -91,6 +91,19 @@ let index = {
 		}).fail(function(error){
 			alert(JSON.stringify(error));
 		}); // ajax 통신을 이용해서 3개의 데이터를 json으로 변경하여 insert 요청
+	},
+	
+	replyDelete:function(boardId, replyId){
+		$.ajax({
+			type:"DELETE",
+			url:`/api/board/${boardId}/reply/${replyId}`,
+			dataType:"json"
+		}).done(function(response){
+			alert("댓글삭제 성공");
+			location.href=`/board/${boardId}`;
+		}).fail(function(error){
+			alert(JSON.stringify(error));
+		});
 	}
 }
 

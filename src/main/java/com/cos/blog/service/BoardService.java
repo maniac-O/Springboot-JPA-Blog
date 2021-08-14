@@ -41,6 +41,7 @@ public class BoardService {
 
 	@Transactional(readOnly=true)
 	public Page<Board> 글목록(Pageable pageable){
+		System.out.println("pageAble : "+pageable);
 		return boardRepository.findAll(pageable);
 	} 
 
@@ -71,7 +72,7 @@ public class BoardService {
 	
 	@Transactional
 	public void 댓글쓰기(ReplySaveRequestDto replySaveRequestDto) {	// title, content
-		
+		/*
 		User user = userRepository.findById(replySaveRequestDto.getUserId())
 				.orElseThrow(()->{
 					return new IllegalArgumentException("댓글 쓰기 실패 : 유저 아이디를 찾을 수 없습니다.");
@@ -88,6 +89,14 @@ public class BoardService {
 				.content(replySaveRequestDto.getContent())
 				.build();
 		
-		replyRepository.save(reply);
+		replyRepository.save(reply);*/
+		
+		// 오브젝트를 출력하게 되면 자동으로 toString()이 출력됨
+		int result = replyRepository.mSave(replySaveRequestDto.getUserId(), replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
+	}
+	
+	@Transactional
+	public void 댓글삭제(int replyId) {
+		replyRepository.deleteById(replyId);
 	}
 }
